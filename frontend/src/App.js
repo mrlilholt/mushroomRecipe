@@ -36,17 +36,20 @@ function App() {
       </Box>
 
       {/* Title */}
-      <Typography
-        variant="h3"
-        sx={{
-          textAlign: "center",
-          fontWeight: "bold",
-          color: "white",
-          marginBottom: "20px",
-        }}
-      >
-        🍄 Mushroom Recipe Finder
-      </Typography>
+     <Typography
+  variant="h3"
+  component="h1"
+  sx={{
+    textAlign: "center",
+    marginBottom: 2,
+    fontFamily: "'Intro Rust', sans-serif", // Replace with custom font later
+    fontWeight: "bold",
+    color: "#fff", // Adjust as needed
+  }}
+>
+  Mushroom Recipe Finder
+</Typography>
+
 
       {/* Search Section */}
       <Box
