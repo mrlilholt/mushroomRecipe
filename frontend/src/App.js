@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Box, Card, CardMedia, Typography, Grid } from "@mui/material";
-import { Button } from "@mui/material";
+import { Box, Card, CardMedia, Typography, Grid, Button } from "@mui/material";
 
 function App() {
   const [mushroom, setMushroom] = useState("");
@@ -21,34 +20,73 @@ function App() {
   return (
     <Box
       sx={{
-        background: "linear-gradient(to bottom, #3f51b5, #5c6bc0)",
+        background: "linear-gradient(to bottom, #1e3c72, #2a5298)",
         minHeight: "100vh",
         padding: 3,
+        color: "white",
       }}
     >
-      <Typography variant="h3" sx={{ textAlign: "center", color: "white" }}>
+      {/* Logo */}
+      <Box sx={{ display: "flex", justifyContent: "center", marginBottom: 2 }}>
+        <img
+          src="/frontend/mushroom-recipe-finder/src/mushroomLogo.png" // Replace with your logo path
+          alt="Mushroom Recipe Logo"
+          style={{ width: "80px", height: "auto" }}
+        />
+      </Box>
+
+      {/* Title */}
+      <Typography
+        variant="h3"
+        sx={{
+          textAlign: "center",
+          fontWeight: "bold",
+          color: "white",
+          marginBottom: "20px",
+        }}
+      >
         🍄 Mushroom Recipe Finder
       </Typography>
 
       {/* Search Section */}
-      <Box sx={{ display: "flex", justifyContent: "center", mt: 3 }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          marginBottom: 3,
+        }}
+      >
         <input
           type="text"
           placeholder="Search for mushrooms..."
           value={mushroom}
           onChange={(e) => setMushroom(e.target.value)}
           style={{
-            padding: "10px",
-            borderRadius: "8px",
-            marginRight: "8px",
+            padding: "12px",
+            borderRadius: "25px",
             border: "none",
             width: "300px",
+            background: "rgba(255, 255, 255, 0.2)",
+            backdropFilter: "blur(10px)",
+            color: "white",
+            fontSize: "16px",
+            marginRight: "10px",
+            outline: "none",
           }}
         />
         <Button
-          variant="contained"
-          color="secondary"
           onClick={fetchRecipes}
+          variant="contained"
+          sx={{
+            background: "linear-gradient(135deg, #6dd5ed, #2193b0)",
+            color: "white",
+            borderRadius: "25px",
+            padding: "10px 20px",
+            textTransform: "none",
+            "&:hover": {
+              background: "linear-gradient(135deg, #5ab4d7, #1b7e95)",
+            },
+          }}
         >
           Search
         </Button>
@@ -103,4 +141,3 @@ function App() {
 }
 
 export default App;
-
