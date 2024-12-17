@@ -1,11 +1,11 @@
 from flask import Flask, request, jsonify
-from flask_cors import CORS
+from flask_cors import CORS  # Import CORS
 from bs4 import BeautifulSoup
 import requests
 import re
 
 app = Flask(__name__)
-CORS(app)  # Allow cross-origin requests from frontend
+CORS(app)  # Allow cross-origin requests
 
 def scrape_recipes(mushroom):
     url = f"https://www.allrecipes.com/search?q={mushroom.replace(' ', '+')}"
@@ -54,6 +54,10 @@ def scrape_recipes(mushroom):
 
     return recipes
 
+@app.route('/')  # Default route for testing
+def home():
+    return "Mushroom Recipe API is running!", 200
+
 @app.route('/search', methods=['GET'])
 def search_recipes():
     mushroom = request.args.get('mushroom', '')
@@ -64,6 +68,4 @@ def search_recipes():
     return jsonify(results)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
-
-
+    app.run(debug=True)
