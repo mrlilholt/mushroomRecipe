@@ -5,8 +5,18 @@ import requests
 import re
 
 app = Flask(__name__)
-CORS(app)  # Allow cross-origin requests
+CORS(app)  # Allow all origins
 
+@app.route('/search', methods=['GET'])
+def search_recipes():
+    mushroom = request.args.get('mushroom', '')
+    if not mushroom:
+        return jsonify({"error": "No mushroom type provided"}), 400
+    
+    results = scrape_recipes(mushroom)
+    return jsonify(results)
+
+# Function for scraping recipes
 def scrape_recipes(mushroom):
     url = f"https://www.allrecipes.com/search?q={mushroom.replace(' ', '+')}"
     headers = {'User-Agent': 'Mozilla/5.0'}
@@ -53,19 +63,6 @@ def scrape_recipes(mushroom):
             print(f"Error: {e}")
 
     return recipes
-
-@app.route('/')  # Default route for testing
-def home():
-    return "Mushroom Recipe API is running!", 200
-
-@app.route('/search', methods=['GET'])
-def search_recipes():
-    mushroom = request.args.get('mushroom', '')
-    if not mushroom:
-        return jsonify({"error": "No mushroom type provided"}), 400
-
-    results = scrape_recipes(mushroom)
-    return jsonify(results)
 
 if __name__ == '__main__':
     app.run(debug=True)
