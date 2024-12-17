@@ -42,14 +42,13 @@ function App() {
   sx={{
     textAlign: "center",
     marginBottom: 2,
-    fontFamily: "'Intro Rust', sans-serif", // Replace with custom font later
-    fontWeight: "bold",
-    color: "#fff", // Adjust as needed
+    fontFamily: "'Poppins', sans-serif",
+    fontWeight: 400, // Regular weight
+    color: "#fff",
   }}
 >
   Mushroom Recipe Finder
 </Typography>
-
 
       {/* Search Section */}
       <Box
