@@ -29,7 +29,7 @@ function App() {
       {/* Logo */}
       <Box sx={{ display: "flex", justifyContent: "center", marginBottom: 2 }}>
         <img
-          src="frontend/src/mushroomLogo.png" // Replace with your logo path
+          src="mushroomLogo.png" // Replace with your logo path
           alt="Mushroom Recipe Logo"
           style={{ width: "80px", height: "auto" }}
         />
