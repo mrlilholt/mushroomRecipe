@@ -27,7 +27,7 @@ function App() {
       }}
     >
       {/* Logo */}
-      <Box sx={{ display: "flex", justifyContent: "center", marginBottom: 2 }}>
+      <Box sx={{ display: "flex", justifyContent: "center", marginBottom: 8px }}>
         <img
           src="/mushroomLogo.png" // Start with '/'
           alt="Mushroom Recipe Logo"
