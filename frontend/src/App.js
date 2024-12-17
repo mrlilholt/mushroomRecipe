@@ -1,59 +1,103 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import './App.css';
+import React, { useState } from "react";
+import axios from "axios";
+import {
+  Box,
+  Card,
+  CardContent,
+  CardMedia,
+  Typography,
+  TextField,
+  Button,
+  Grid,
+} from "@mui/material";
 
 function App() {
-  const [mushroom, setMushroom] = useState('');
+  const [mushroom, setMushroom] = useState("");
   const [recipes, setRecipes] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
 
   const fetchRecipes = async () => {
-    if (!mushroom) return;
-    setLoading(true);
-    setError('');
-    setRecipes([]);
-
     try {
       const response = await axios.get(
-  `https://mushroomrecipe.onrender.com/search?mushroom=${mushroom}`
-);
+        `https://mushroomrecipe.onrender.com/search?mushroom=${mushroom}`
+      );
       setRecipes(response.data);
-    } catch (err) {
-      console.error('Error fetching recipes:', err);
-      setError('Failed to fetch recipes. Please try again.');
-    } finally {
-      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching recipes:", error);
     }
   };
 
   return (
-    <div className="App">
-      <h1>Mushroom Recipe Finder</h1>
-      <div className="search-bar">
-        <input
-          type="text"
-          placeholder="Enter mushroom type (e.g., chanterelle)"
-          value={mushroom}
+    <Box
+      sx={{
+        background: "linear-gradient(to bottom, #3f51b5, #5c6bc0)",
+        minHeight: "100vh",
+        color: "white",
+        textAlign: "center",
+        padding: 3,
+      }}
+    >
+      <Typography variant="h3" gutterBottom>
+        🍄 Mushroom Recipe Finder
+      </Typography>
+
+      {/* Search Bar */}
+      <Box sx={{ display: "flex", justifyContent: "center", margin: 2 }}>
+        <TextField
+          label="Search for Mushrooms"
+          variant="outlined"
+          color="secondary"
+          sx={{ backgroundColor: "white", borderRadius: 1, marginRight: 1 }}
           onChange={(e) => setMushroom(e.target.value)}
         />
-        <button onClick={fetchRecipes}>Search</button>
-      </div>
+        <Button
+          variant="contained"
+          color="secondary"
+          onClick={fetchRecipes}
+        >
+          Search
+        </Button>
+      </Box>
 
-      {loading && <p>Loading recipes...</p>}
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-
-      <div className="recipe-grid">
+      {/* Recipe Grid */}
+      <Grid container spacing={3} justifyContent="center">
         {recipes.map((recipe, index) => (
-          <div key={index} className="recipe-card">
-            <img src={recipe.image_url} alt={recipe.title} />
-            <h3>{recipe.title}</h3>
-            <p>⭐ {recipe.rating} stars ({recipe.ratings_count} reviews)</p>
-            <a href={recipe.link} target="_blank" rel="noopener noreferrer">View Recipe</a>
-          </div>
+          <Grid item xs={12} sm={6} md={4} key={index}>
+            <Card
+              sx={{
+                maxWidth: 345,
+                borderRadius: 3,
+                boxShadow: 5,
+                backgroundColor: "#f5f5f5",
+              }}
+            >
+              <CardMedia
+                component="img"
+                height="200"
+                image={recipe.image_url}
+                alt={recipe.title}
+              />
+              <CardContent>
+                <Typography variant="h6" component="div" color="primary">
+                  {recipe.title}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  ⭐ {recipe.rating} stars ({recipe.ratings_count} reviews)
+                </Typography>
+                <Button
+                  variant="outlined"
+                  color="secondary"
+                  href={recipe.link}
+                  target="_blank"
+                  sx={{ marginTop: 1 }}
+                >
+                  View Recipe
+                </Button>
+              </CardContent>
+            </Card>
+          </Grid>
         ))}
-      </div>
-    </div>
+      </Grid>
+    </Box>
   );
 }
 
