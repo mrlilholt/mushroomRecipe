@@ -15,7 +15,9 @@ function App() {
     setRecipes([]);
 
     try {
-      const response = await axios.get(`http://127.0.0.1:5000/search?mushroom=${mushroom}`);
+      const response = await axios.get(
+  `https://mushroomrecipe.onrender.com/search?mushroom=${mushroom}`
+);
       setRecipes(response.data);
     } catch (err) {
       console.error('Error fetching recipes:', err);
